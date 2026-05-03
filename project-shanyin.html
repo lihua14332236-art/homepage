@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>山隐 — 茶品牌视觉识别 | Long Feiyu</title>
+  <meta name="description" content="山隐 — 从logo到包装的全套品牌视觉系统，传递东方美学。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff; --bg-secondary: #f7f7f5; --text: #1a1a1a;
+      --text-secondary: #6b6b6b; --text-tertiary: #9b9b9b;
+      --border: #e6e6e4; --border-light: #f0f0ee; --hover: #f2f2f0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text); background: var(--bg); line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    .back-nav { max-width: 1100px; margin: 0 auto; padding: 32px 32px 0; }
+    .back-link { font-size: 14px; color: var(--text-secondary); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .back-link:hover { color: var(--text); }
+    .project-hero { max-width: 1100px; margin: 0 auto; padding: 48px 32px; }
+    .project-hero .category { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-tertiary); margin-bottom: 12px; }
+    .project-hero h1 { font-size: clamp(36px, 6vw, 64px); font-weight: 700; letter-spacing: -2px; line-height: 1.12; margin-bottom: 16px; }
+    .project-hero .subtitle { font-size: 18px; color: var(--text-secondary); max-width: 600px; line-height: 1.7; }
+    .hero-image { max-width: 1100px; margin: 0 auto; padding: 0 32px 48px; }
+    .hero-image-placeholder { width: 100%; height: 420px; border-radius: 16px; background: linear-gradient(135deg, #3d5a3c 0%, #5c7a56 30%, #8ba888 60%, #bcccb4 100%); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+    .hero-image-placeholder::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.08) 0%, transparent 70%); }
+    .hero-image-icon { font-size: 80px; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.25)); z-index: 1; }
+    .meta-bar { max-width: 1100px; margin: 0 auto; padding: 0 32px 48px; display: flex; gap: 48px; flex-wrap: wrap; }
+    .meta-item .meta-label { font-size: 12px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
+    .meta-item .meta-value { font-size: 15px; color: var(--text); font-weight: 500; margin-top: 4px; }
+    .section-divider { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+    .section-divider hr { border: none; border-top: 1px solid var(--border-light); }
+    .content-section { max-width: 1100px; margin: 0 auto; padding: 64px 32px; }
+    .content-section .step-num { font-size: 12px; font-weight: 600; color: var(--text-tertiary); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+    .content-section h2 { font-size: clamp(24px, 4vw, 32px); font-weight: 600; letter-spacing: -0.8px; margin-bottom: 20px; }
+    .content-section .section-body { font-size: 16px; color: var(--text-secondary); line-height: 1.85; max-width: 680px; }
+    .content-section .section-body p { margin-bottom: 16px; }
+    .image-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+    .image-grid .img-placeholder { height: 240px; border-radius: 12px; border: 1px solid var(--border-light); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; background: var(--bg-secondary); }
+    .image-grid .img-placeholder span { font-size: 13px; color: var(--text-tertiary); }
+    .image-grid .img-label { font-size: 13px; color: var(--text-tertiary); text-align: center; margin-top: 4px; }
+    .full-image { margin-top: 32px; }
+    .full-image .img-placeholder { width: 100%; height: 280px; border-radius: 12px; border: 1px solid var(--border-light); display: flex; align-items: center; justify-content: center; background: var(--bg-secondary); }
+    .full-image .img-placeholder span { font-size: 13px; color: var(--text-tertiary); }
+    .full-image .img-label { font-size: 13px; color: var(--text-tertiary); margin-top: 8px; text-align: center; }
+    .color-palette { display: flex; gap: 0; margin-top: 32px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-light); }
+    .color-swatch { flex: 1; height: 80px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 10px; }
+    .color-swatch span { font-size: 11px; font-weight: 500; letter-spacing: 0.3px; }
+    .process-steps { margin-top: 32px; display: grid; gap: 16px; }
+    .process-step { display: flex; gap: 20px; padding: 20px 24px; border-radius: 10px; background: var(--bg-secondary); border: 1px solid var(--border-light); }
+    .process-step .step-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--hover); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 18px; }
+    .process-step .step-content h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .process-step .step-content p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+    .back-bottom { max-width: 1100px; margin: 0 auto; padding: 48px 32px 80px; display: flex; justify-content: space-between; align-items: center; }
+    .back-bottom a { font-size: 14px; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+    .back-bottom a:hover { color: var(--text); }
+    .back-bottom .next-project { display: inline-flex; align-items: center; gap: 8px; }
+    @media (max-width: 768px) {
+      .back-nav, .project-hero, .hero-image, .meta-bar, .content-section, .back-bottom { padding-left: 20px; padding-right: 20px; }
+      .image-grid { grid-template-columns: 1fr; }
+      .hero-image-placeholder { height: 240px; }
+      .meta-bar { gap: 24px; }
+      .color-palette { flex-direction: column; }
+      .color-swatch { height: 48px; align-items: center; justify-content: flex-start; padding: 0 16px; }
+    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-up { animation: fadeUp 0.6s ease both; }
+  </style>
+</head>
+<body>
+
+  <div class="back-nav fade-up">
+    <a href="index.html" class="back-link">← 返回主页</a>
+  </div>
+
+  <div class="project-hero fade-up">
+    <div class="category">Branding</div>
+    <h1>山隐 — 茶品牌<br>视觉识别设计</h1>
+    <p class="subtitle">为高端茶品牌「山隐」打造从 logo 到包装的全套视觉识别系统，以现代设计语言重新诠释东方茶文化。</p>
+  </div>
+
+  <div class="hero-image fade-up">
+    <div class="hero-image-placeholder">
+      <div class="hero-image-icon">🍃</div>
+    </div>
+  </div>
+
+  <div class="meta-bar fade-up">
+    <div class="meta-item">
+      <div class="meta-label">Role</div>
+      <div class="meta-value">品牌设计师（课程项目）</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Timeline</div>
+      <div class="meta-value">2024.01 — 2024.04（8 周）</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Tools</div>
+      <div class="meta-value">Illustrator / Photoshop / InDesign</div>
+    </div>
+  </div>
+
+  <div class="section-divider"><hr></div>
+
+  <div class="content-section">
+    <div class="step-num">00 — Overview</div>
+    <h2>项目背景</h2>
+    <div class="section-body">
+      <p>「山隐」是一个虚构的高端茶品牌概念，定位为「都市中的山野之意」。品牌希望在传统茶文化的厚重感与现代生活方式的轻量化之间找到平衡，通过视觉设计传递「隐于山、归于心」的品牌哲学。</p>
+      <p>项目涵盖品牌策略、logo 设计、色彩与字体系统、包装设计、品牌手册等完整视觉识别体系的构建。</p>
+    </div>
+  </div>
+
+  <div class="section-divider"><hr></div>
+
+  <div class="content-section">
+    <div class="step-num">01 — Logo</div>
+    <h2>标志设计</h2>
+    <div class="section-body">
+      <p>以「山」字的篆书为灵感来源，将山峦的层叠形态与茶叶的舒展姿态相融合，形成兼具识别性与文化内涵的图形标志。</p>
+    </div>
+    <div class="full-image">
+      <div class="img-placeholder"><span>Logo 设计演化过程 — 此处展示 design iterations</span></div>
+      <div class="img-label">图：logo 从草图到终稿的迭代过程</div>
+    </div>
+
+    <h3 style="font-size:15px;font-weight:600;margin-top:32px;margin-bottom:12px;color:var(--text-secondary)">品牌色</h3>
+    <div class="color-palette">
+      <div class="color-swatch" style="background:#2d4a22"><span style="color:#fff">#2D4A22 山绿</span></div>
+      <div class="color-swatch" style="background:#5c7a56"><span style="color:#fff">#5C7A56 苔青</span></div>
+      <div class="color-swatch" style="background:#d4c9b8"><span style="color:#333">#D4C9B8 茶褐</span></div>
+      <div class="color-swatch" style="background:#f7f3eb"><span style="color:#333">#F7F3EB 宣纸</span></div>
+      <div class="color-swatch" style="background:#1a1a1a"><span style="color:#fff">#1A1A1A 墨色</span></div>
+    </div>
+  </div>
+
+  <div class="section-divider"><hr></div>
+
+  <div class="content-section">
+    <div class="step-num">02 — Package</div>
+    <h2>包装设计</h2>
+    <div class="section-body">
+      <p>包装采用环保再生纸张与植物染料印刷，呼应品牌天然、可持续的价值观。结构上借鉴传统茶饼的包裹方式，融入现代磁吸开合设计。</p>
+    </div>
+    <div class="image-grid">
+      <div>
+        <div class="img-placeholder"><span>茶叶罐</span></div>
+        <div class="img-label">散茶金属罐装</div>
+      </div>
+      <div>
+        <div class="img-placeholder"><span>礼盒套装</span></div>
+        <div class="img-label">节日限定礼盒</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><hr></div>
+
+  <div class="content-section">
+    <div class="step-num">03 — Brand Guide</div>
+    <h2>品牌手册</h2>
+    <div class="section-body">
+      <p>编制了一本 40 页的品牌视觉识别手册，涵盖品牌故事、标志规范、色彩系统、字体规范、应用示例等完整内容，可作为品牌后续延展的执行标准。</p>
+    </div>
+    <div class="full-image">
+      <div class="img-placeholder"><span>品牌手册展开页 — 此处展示 brand guideline</span></div>
+      <div class="img-label">图：品牌手册内页展示</div>
+    </div>
+
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-icon">📖</div>
+        <div class="step-content">
+          <h4>品牌故事</h4>
+          <p>定义品牌核心理念「隐于山、归于心」，建立与目标受众的情感连接。</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-icon">🎯</div>
+        <div class="step-content">
+          <h4>应用场景</h4>
+          <p>覆盖茶饮店空间、线上商城、社交媒体等 12 个应用触点。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><hr></div>
+
+  <div class="content-section">
+    <div class="step-num">04 — Reflection</div>
+    <h2>总结与反思</h2>
+    <div class="section-body">
+      <p>这次品牌设计让我体会到：</p>
+      <p><strong>文化符号的转译需要克制。</strong>不是越多传统元素越好，而是找到最核心的文化意象，用当代设计语法重新表达，才能让品牌既有底蕴又不显陈旧。</p>
+      <p><strong>品牌设计是系统思维。</strong>一个 logo 只是起点，真正的品牌力体现在每一个触点的统一与细节中。</p>
+    </div>
+  </div>
+
+  <div class="section-divider"><hr></div>
+  <div class="back-bottom fade-up">
+    <a href="index.html">← 返回主页</a>
+    <a href="project-meetnode.html" class="next-project">下一个项目：MeetNode →</a>
+  </div>
+
+</body>
+</html>

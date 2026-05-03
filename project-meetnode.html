@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MeetNode — 在线协作白板设计 | Long Feiyu</title>
+  <meta name="description" content="MeetNode — 探索远程协作场景下的交互模式与界面设计，为分布式团队打造高效、直观的在线白板工具。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff; --bg-secondary: #f7f7f5; --text: #1a1a1a;
+      --text-secondary: #6b6b6b; --text-tertiary: #9b9b9b;
+      --border: #e6e6e4; --border-light: #f0f0ee; --hover: #f2f2f0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text); background: var(--bg); line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    .back-nav { max-width: 1100px; margin: 0 auto; padding: 32px 32px 0; }
+    .back-link { font-size: 14px; color: var(--text-secondary); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .back-link:hover { color: var(--text); }
+    .project-hero { max-width: 1100px; margin: 0 auto; padding: 48px 32px; }
+    .project-hero .category { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-tertiary); margin-bottom: 12px; }
+    .project-hero h1 { font-size: clamp(36px, 6vw, 64px); font-weight: 700; letter-spacing: -2px; line-height: 1.12; margin-bottom: 16px; }
+    .project-hero .subtitle { font-size: 18px; color: var(--text-secondary); max-width: 600px; line-height: 1.7; }
+    .hero-image { max-width: 1100px; margin: 0 auto; padding: 0 32px 48px; }
+    .hero-image-placeholder { width: 100%; height: 420px; border-radius: 16px; background: linear-gradient(135deg, #1a6b5a 0%, #2d9d7f 30%, #48c4a0 60%, #8ed6c3 100%); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+    .hero-image-placeholder::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.08) 0%, transparent 70%); }
+    .hero-image-icon { font-size: 80px; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.25)); z-index: 1; }
+    .meta-bar { max-width: 1100px; margin: 0 auto; padding: 0 32px 48px; display: flex; gap: 48px; flex-wrap: wrap; }
+    .meta-item .meta-label { font-size: 12px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
+    .meta-item .meta-value { font-size: 15px; color: var(--text); font-weight: 500; margin-top: 4px; }
+    .section-divider { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+    .section-divider hr { border: none; border-top: 1px solid var(--border-light); }
+    .content-section { max-width: 1100px; margin: 0 auto; padding: 64px 32px; }
+    .content-section .step-num { font-size: 12px; font-weight: 600; color: var(--text-tertiary); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+    .content-section h2 { font-size: clamp(24px, 4vw, 32px); font-weight: 600; letter-spacing: -0.8px; margin-bottom: 20px; }
+    .content-section .section-body { font-size: 16px; color: var(--text-secondary); line-height: 1.85; max-width: 680px; }
+    .content-section .section-body p { margin-bottom: 16px; }
+    .image-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+    .image-grid .img-placeholder { height: 240px; border-radius: 12px; border: 1px solid var(--border-light); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; background: var(--bg-secondary); }
+    .image-grid .img-placeholder span { font-size: 13px; color: var(--text-tertiary); }
+    .image-grid .img-label { font-size: 13px; color: var(--text-tertiary); text-align: center; margin-top: 4px; }
+    .full-image { margin-top: 32px; }
+    .full-image .img-placeholder { width: 100%; height: 280px; border-radius: 12px; border: 1px solid var(--border-light); display: flex; align-items: center; justify-content: center; background: var(--bg-secondary); }
+    .full-image .img-placeholder span { font-size: 13px; color: var(--text-tertiary); }
+    .full-image .img-label { font-size: 13px; color: var(--text-tertiary); margin-top: 8px; text-align: center; }
+    .color-palette { display: flex; gap: 0; margin-top: 32px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-light); }
+    .color-swatch { flex: 1; height: 80px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 10px; }
+    .color-swatch span { font-size: 11px; font-weight: 500; letter-spacing: 0.3px; }
+    .process-steps { margin-top: 32px; display: grid; gap: 16px; }
+    .process-step { display: flex; gap: 20px; padding: 20px 24px; border-radius: 10px; background: var(--bg-secondary); border: 1px solid var(--border-light); }
+    .process-step .step-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--hover); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 18px; }
+    .process-step .step-content h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .process-step .step-content p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+    .back-bottom { max-width: 1100px; margin: 0 auto; padding: 48px 32px 80px; display: flex; justify-content: space-between; align-items: center; }
+    .back-bottom a { font-size: 14px; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+    .back-bottom a:hover { color: var(--text); }
+    .back-bottom .next-project { display: inline-flex; align-items: center; gap: 8px; }
+    @media (max-width: 768px) {
+      .back-nav, .project-hero, .hero-image, .meta-bar, .content-section, .back-bottom { padding-left: 20px; padding-right: 20px; }
+      .image-grid { grid-template-columns: 1fr; }
+      .hero-image-placeholder { height: 240px; }
+      .meta-bar { gap: 24px; }
+      .color-palette { flex-direction: column; }
+      .color-swatch { height: 48px; align-items: center; justify-content: flex-start; padding: 0 16px; }
+    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-up { animation: fadeUp 0.6s ease both; }
+  </style>
+</head>
+<body>
+
+  <div class="back-nav fade-up">
+    <a href="index.html" class="back-link">← 返回主页</a>
+  </div>
+
+  <div class="project-hero fade-up">
+    <div class="category">UI/UX Design</div>
+    <h1>MeetNode — 在线协作<br>白板设计</h1>
+    <p class="subtitle">探索远程协作场景下的交互模式与界面设计，为分布式团队打造高效、直观的在线白板工具。</p>
+  </div>
+
+  <div class="hero-image fade-up">
+    <div class="hero-image-placeholder">
+      <div class="hero-image-icon">🎯</div>
+    </div>
+  </div>
+
+  <div class="meta-bar fade-up">
+    <div class="meta-item">
+      <div class="meta-label">Role</div>
+      <div class="meta-value">产品设计师（团队项目）</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Timeline</div>
+      <div class="meta-value">2023.09 — 2023.12（16 周）</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Tools</div>
+      <div class="meta-value">Figma / Miro / Protopie</div>
+    </div>
+  </div>
+
+  <div class="section-divider"><hr></div>
+
+  <div class="content-section">
+    <div class="step-num">00 — Overview</div>
+    <h2>项目背景</h2>
+    <div class="section-body">
+      <p>随着远程办公与分布式团队的普及，在线协作工具的需求呈爆发式增长。然而，市面上的协作白板工具在交互直观性和设计一致性方面仍有明显不足——操作路径冗长、视觉层级混乱、多人协同时的状态反馈不够清晰，这些问题严重影响了团队的协作效率与创作体验。</p>
+      <p>MeetNode 旨在重新思考在线白板的交互范式，从真实物理白板的使用习惯出发，将自然的书写、拖拽、空间组织等行为映射到数字界面中，打造一款兼顾直觉性与功能深度的协作白板产品。</p>
+    </div>
+  </div>
+
+  <div class="section-divider"><hr></div>
+
+  <div class="content-section">
+    <div class="step-num">01 — Research</div>
+    <h2>用户研究与市场分析</h2>
+    <div class="section-body">
+      <p>在设计启动阶段，我们通过多种研究方法深入理解用户行为、痛点和期望，系统性地梳理协作白板领域的设计机会点。</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-icon">🗣️</div>
+        <div class="step-content">
+          <h4>利益相关者访谈</h4>
+          <p>与 8 位来自产品、设计、研发团队的远程协作者进行深度访谈，了解日常白板使用场景、工具切换痛点、以及理想协作体验的关键要素。</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-icon">🔍</div>
+        <div class="step-content">
+          <h4>竞品分析：Miro / FigJam / Mural</h4>
+          <p>对三大主流协作白板工具进行功能拆解与交互评估，从信息架构、工具栏设计、实时协同反馈、模板系统四个维度进行对比分析，提炼可借鉴的设计模式与差异化机会。</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-icon">🗺️</div>
+        <div class="step-content">
+          <h4>用户旅程地图</h4>
+          <p>绘制从「发起协作邀请」到「完成共创交付」的端到端用户旅程，识别出 12 个关键情绪低谷和 8 个设计介入点，明确产品需要优先解决的核心体验问题。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><hr></div>
+
+  <div class="content-section">
+    <div class="step-num">02 — Design</div>
+    <h2>信息架构与交互设计</h2>
+    <div class="section-body">
+      <p>基于研究洞察，我们定义了 MeetNode 的核心设计原则：<strong>把复杂性藏起来，让简单的事情保持简单。</strong>产品在默认状态下呈现极简的白板界面，随着用户需求逐步展开高级功能。</p>
+      <p>信息架构围绕「空间 — 内容 — 协作」三个维度展开，确保用户能在不同层级间自然流转。</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-icon">📋</div>
+        <div class="step-content">
+          <h4>信息架构</h4>
+          <p>建立以「工作空间 → 项目 → 白板」为主干的三层架构，支持嵌套式组织与快速检索，适配个人与团队两种使用模式。</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-icon">✏️</div>
+        <div class="step-content">
+          <h4>线框图与交互原型</h4>
+          <p>完成 40+ 个屏幕的低保真线框图，并通过 Figma 交互原型验证核心流程——包括便签创建、绘图工具切换、模板调用、实时光标跟随等关键场景。</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-icon">🎨</div>
+        <div class="step-content">
+          <h4>核心功能交互设计</h4>
+          <p>重点打磨便签（Sticky Notes）的创建与编辑手势、自由画笔的笔触反馈、模板市场的浏览与一键应用、多人实时光标的气泡标识等高频交互。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><hr></div>
+
+  <div class="content-section">
+    <div class="step-num">03 — Screens</div>
+    <h2>关键界面展示</h2>
+    <div class="section-body">
+      <p>以下是 MeetNode 核心界面的高保真设计稿，涵盖仪表盘、白板编辑器、模板库和设置页面四个主要场景。</p>
+    </div>
+    <div class="image-grid">
+      <div>
+        <div class="img-placeholder"><span>📊 Dashboard 界面</span></div>
+        <div class="img-label">仪表盘 — 工作空间总览</div>
+      </div>
+      <div>
+        <div class="img-placeholder"><span>🖊️ Whiteboard 界面</span></div>
+        <div class="img-label">白板编辑器 — 核心创作区域</div>
+      </div>
+      <div>
+        <div class="img-placeholder"><span>📁 Template Gallery</span></div>
+        <div class="img-label">模板库 — 浏览与一键套用</div>
+      </div>
+      <div>
+        <div class="img-placeholder"><span>⚙️ Settings 界面</span></div>
+        <div class="img-label">设置 — 权限与偏好管理</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><hr></div>
+
+  <div class="content-section">
+    <div class="step-num">04 — Prototype</div>
+    <h2>可交互原型</h2>
+    <div class="section-body">
+      <p>在 Protopie 中构建了具备真实感的高保真可交互原型，覆盖完整的协作流程——从新建白板、邀请成员、放置便签、自由绘制到实时光标跟随，让用户在正式开发前即可沉浸式体验产品核心价值。</p>
+    </div>
+    <div class="full-image">
+      <div class="img-placeholder"><span>🎬 Protopie 可交互原型预览</span></div>
+      <div class="img-label">图：Protopie 原型录制截图 — 展示多人协作场景</div>
+    </div>
+  </div>
+
+  <div class="section-divider"><hr></div>
+
+  <div class="content-section">
+    <div class="step-num">05 — Reflection</div>
+    <h2>总结与反思</h2>
+    <div class="section-body">
+      <p>这次协作白板设计项目让我深刻理解到：</p>
+      <p><strong>为协作而设计，需要将「关系」放在和「功能」同等重要的位置。</strong>实时协作不只是技术问题——光标的位置、编辑的归属、冲突的提示，这些微交互共同构成了用户对「在一起工作」的感知。忽视任何一环，都会削弱协作的沉浸感。</p>
+      <p><strong>管理实时状态是设计协作工具的核心难点。</strong>在高并发场景下，如何优雅地展示多人的并行操作而不造成视觉混乱，需要借助层级、透明度、动画等设计手段进行信息降噪。</p>
+      <p><strong>在简洁与强大之间寻找平衡。</strong>协作白板天然是一个「无限画布」式的复杂系统，但用户的学习成本必须被降到最低。我们的策略是渐进式信息披露——让新用户能立刻开始使用，同时为高级用户保留高效的快捷操作路径。</p>
+    </div>
+  </div>
+
+  <div class="section-divider"><hr></div>
+
+  <h3 style="max-width:1100px;margin:0 auto;padding:48px 32px 12px;font-size:15px;font-weight:600;color:var(--text-secondary)">配色方案</h3>
+  <div class="content-section" style="padding-top:0;">
+    <div class="color-palette">
+      <div class="color-swatch" style="background:#0d3b3b"><span style="color:#fff">#0D3B3B 深海绿</span></div>
+      <div class="color-swatch" style="background:#1a6b60"><span style="color:#fff">#1A6B60 墨绿</span></div>
+      <div class="color-swatch" style="background:#2d9d8e"><span style="color:#fff">#2D9D8E 青绿</span></div>
+      <div class="color-swatch" style="background:#8ed6cc"><span style="color:#333">#8ED6CC 浅绿</span></div>
+      <div class="color-swatch" style="background:#e8f6f3"><span style="color:#333">#E8F6F3 薄荷白</span></div>
+    </div>
+  </div>
+
+  <div class="section-divider"><hr></div>
+  <div class="back-bottom fade-up">
+    <a href="index.html">← 返回主页</a>
+    <a href="project-designsystem.html" class="next-project">下一个项目：个人设计系统 →</a>
+  </div>
+
+</body>
+</html>
