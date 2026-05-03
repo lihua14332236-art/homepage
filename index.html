@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lin Meng — Designer & Creator</title>
+  <meta name="description" content="Lin Meng — 设计学生，热衷于数字产品、品牌与交互设计。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f7f7f5;
+      --text: #1a1a1a;
+      --text-secondary: #6b6b6b;
+      --text-tertiary: #9b9b9b;
+      --border: #e6e6e4;
+      --border-light: #f0f0ee;
+      --hover: #f2f2f0;
+      --accent: #37352f;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ── Navigation ── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-light);
+      transition: border-color 0.3s;
+    }
+
+    .nav.scrolled {
+      border-bottom-color: var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 450;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+      letter-spacing: -0.2px;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 160px 32px 120px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 7vw, 80px);
+      font-weight: 700;
+      letter-spacing: -2px;
+      line-height: 1.08;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+
+    .hero .highlight {
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 520px;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    .hero-tags {
+      display: flex;
+      gap: 10px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    .hero-tag {
+      font-size: 13px;
+      font-weight: 450;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      letter-spacing: -0.1px;
+    }
+
+    /* ── Section common ── */
+    section {
+      padding: 0 32px;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 0;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-tertiary);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 600;
+      letter-spacing: -1px;
+      margin-bottom: 48px;
+      color: var(--text);
+    }
+
+    /* ── About ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .about-text {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .about-text strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      padding: 28px 24px;
+      border: 1px solid var(--border-light);
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+
+    .stat-card:hover {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .stat-number {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      font-weight: 450;
+    }
+
+    /* ── Projects ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--bg-secondary);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border-light);
+      transition: box-shadow 0.3s, transform 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .project-card:hover {
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+      transform: translateY(-4px);
+    }
+
+    .project-card:hover .project-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .project-thumb {
+      height: 200px;
+      background: #eae9e6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      color: #c5c3bd;
+      overflow: hidden;
+    }
+
+    .project-thumb.gradient-1 { background: linear-gradient(135deg, #f7f7f5 0%, #e8e7e2 100%); }
+    .project-thumb.gradient-2 { background: linear-gradient(135deg, #f0efeb 0%, #dbd9d2 100%); }
+    .project-thumb.gradient-3 { background: linear-gradient(135deg, #f5f4f0 0%, #e2e0da 100%); }
+    .project-thumb.gradient-4 { background: linear-gradient(135deg, #f9f8f6 0%, #edebe6 100%); }
+
+    .project-info {
+      padding: 24px;
+    }
+
+    .project-info h3 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.4px;
+      margin-bottom: 6px;
+    }
+
+    .project-info p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .project-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    .project-arrow {
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: all 0.3s;
+      font-size: 16px;
+      margin-left: auto;
+    }
+
+    /* ── Skills ── */
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill-item {
+      font-size: 15px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-light);
+      color: var(--text-secondary);
+      transition: all 0.25s;
+      cursor: default;
+    }
+
+    .skill-item:hover {
+      border-color: var(--border);
+      color: var(--text);
+      background: var(--hover);
+    }
+
+    /* ── Contact / Footer ── */
+    .footer {
+      border-top: 1px solid var(--border-light);
+      margin-top: 40px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .footer-cta {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .footer-cta a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1.5px solid var(--border);
+      transition: border-color 0.2s;
+      padding-bottom: 2px;
+    }
+
+    .footer-cta a:hover {
+      border-color: var(--text);
+    }
+
+    /* ── Divider ── */
+    .divider {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .divider-line {
+      border: none;
+      border-top: 1px solid var(--border-light);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .nav-inner {
+        padding: 0 20px;
+      }
+
+      .nav-links {
+        gap: 18px;
+      }
+
+      .hero {
+        padding: 120px 20px 80px;
+      }
+
+      section {
+        padding: 0 20px;
+      }
+
+      .section-inner {
+        padding: 60px 0;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        padding: 32px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-up {
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Lin Meng</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <h1 class="fade-up">
+      设计<span class="highlight">驱动</span>思考，<br>
+      创造<span class="highlight">有意义</span>的体验
+    </h1>
+    <p class="fade-up delay-1">
+      设计专业在读学生，热衷于探索数字产品、品牌视觉与交互设计。相信好的设计源于对细节的关注和对用户的理解。
+    </p>
+    <div class="hero-tags fade-up delay-2">
+      <span class="hero-tag">UI/UX 设计</span>
+      <span class="hero-tag">品牌设计</span>
+      <span class="hero-tag">交互原型</span>
+      <span class="hero-tag">视觉传达</span>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="section-label">About</div>
+      <h2 class="section-title">关于我</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>你好，我是<strong>林梦</strong>，一名设计专业的学生，目前专注于数字产品设计与品牌视觉传达。</p>
+          <br>
+          <p>我的设计理念源于<strong>「少即是多」</strong>——在简洁中寻找力量，在约束中创造可能。我相信优秀的设计是功能与美学的平衡，是逻辑与感性的交汇。</p>
+          <br>
+          <p>课余时间，我喜欢探索新兴的设计工具、研究优秀产品的设计系统，并通过个人项目不断实践所学。</p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-number">3+</div>
+            <div class="stat-label">年设计学习经历</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">12</div>
+            <div class="stat-label">完成的项目</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">5</div>
+            <div class="stat-label">获奖/入选</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">∞</div>
+            <div class="stat-label">对设计的热爱</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="section-inner">
+      <div class="section-label">Projects</div>
+      <h2 class="section-title">作品集</h2>
+      <div class="projects-grid">
+
+        <a href="#" class="project-card">
+          <div class="project-thumb gradient-1">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#9b9b9b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div class="project-info">
+            <h3>乐享 — 音乐流媒体 App 概念设计</h3>
+            <p>从用户研究到高保真原型，完整的产品设计流程实践。</p>
+            <div class="project-meta">
+              <span>UI/UX</span>
+              <span>·</span>
+              <span>2024</span>
+              <span class="project-arrow">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="project-card">
+          <div class="project-thumb gradient-2">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#9b9b9b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </div>
+          <div class="project-info">
+            <h3>山隐 — 茶品牌视觉识别设计</h3>
+            <p>从logo到包装的全套品牌视觉系统，传递东方美学。</p>
+            <div class="project-meta">
+              <span>Branding</span>
+              <span>·</span>
+              <span>2024</span>
+              <span class="project-arrow">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="project-card">
+          <div class="project-thumb gradient-3">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#9b9b9b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73L13 2.27a2 2 0 0 0-2 0L4 6.27A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <div class="project-info">
+            <h3>MeetNode — 在线协作白板设计</h3>
+            <p>探索远程协作场景下的交互模式与界面设计。</p>
+            <div class="project-meta">
+              <span>UI/UX</span>
+              <span>·</span>
+              <span>2023</span>
+              <span class="project-arrow">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="project-card">
+          <div class="project-thumb gradient-4">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#9b9b9b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          </div>
+          <div class="project-info">
+            <h3>个人设计系统 — Design Tokens</h3>
+            <p>建立可复用的设计令牌体系，提升设计效率与一致性。</p>
+            <div class="project-meta">
+              <span>Design System</span>
+              <span>·</span>
+              <span>2023</span>
+              <span class="project-arrow">→</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <div class="section-inner">
+      <div class="section-label">Skills</div>
+      <h2 class="section-title">技能与工具</h2>
+      <div class="skills-list">
+        <span class="skill-item">Figma</span>
+        <span class="skill-item">Sketch</span>
+        <span class="skill-item">Adobe Illustrator</span>
+        <span class="skill-item">Adobe Photoshop</span>
+        <span class="skill-item">Adobe After Effects</span>
+        <span class="skill-item">Protopie</span>
+        <span class="skill-item">Principle</span>
+        <span class="skill-item">Blender</span>
+        <span class="skill-item">HTML / CSS</span>
+        <span class="skill-item">Design Systems</span>
+        <span class="skill-item">User Research</span>
+        <span class="skill-item">Wireframing</span>
+        <span class="skill-item">Prototyping</span>
+        <span class="skill-item">Visual Design</span>
+        <span class="skill-item">Typography</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / Footer -->
+  <div class="divider">
+    <hr class="divider-line">
+  </div>
+  <footer class="footer" id="contact">
+    <div class="footer-inner">
+      <div class="footer-cta">
+        想一起聊聊设计？ <a href="mailto:linmeng@example.com">linmeng@example.com</a>
+      </div>
+      <ul class="footer-links">
+        <li><a href="#">Dribbble</a></li>
+        <li><a href="#">Behance</a></li>
+        <li><a href="#">GitHub</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+      <span class="footer-copy">&copy; 2024 Lin Meng</span>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
+</html>
