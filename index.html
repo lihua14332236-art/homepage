@@ -116,6 +116,15 @@
       font-weight: 400;
     }
 
+    .hero-avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 32px;
+      border: 3px solid var(--border-light);
+    }
+
     .hero p {
       font-size: 18px;
       color: var(--text-secondary);
@@ -467,14 +476,15 @@
 
   <!-- Hero -->
   <header class="hero">
-    <h1 class="fade-up">
+    <img class="hero-avatar fade-up" src="avatar.jpg" alt="Long Feiyu">
+    <h1 class="fade-up delay-1">
       设计<span class="highlight">驱动</span>思考，<br>
       创造<span class="highlight">有意义</span>的体验
     </h1>
-    <p class="fade-up delay-1">
+    <p class="fade-up delay-2">
       设计专业在读学生，热衷于探索数字产品、品牌视觉与交互设计。相信好的设计源于对细节的关注和对用户的理解。
     </p>
-    <div class="hero-tags fade-up delay-2">
+    <div class="hero-tags fade-up delay-3">
       <span class="hero-tag">UI/UX 设计</span>
       <span class="hero-tag">品牌设计</span>
       <span class="hero-tag">交互原型</span>
